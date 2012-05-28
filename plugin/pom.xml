@@ -1,0 +1,71 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <!-- Forked from Jenkins findbugs-plugin 4.41 -->
+  
+  <parent>
+    <groupId>org.eclipse.hudson.plugins</groupId>
+    <artifactId>analysis-pom</artifactId>
+    <version>3.0.0-SNAPSHOT</version>
+    <relativePath>../../analysis-pom/pom.xml</relativePath>
+  </parent>
+
+  <artifactId>findbugs</artifactId>
+  <packaging>hpi</packaging>
+  <name>FindBugs Plug-in</name>
+  <version>4.41-SNAPSHOT</version>
+  <url>http://wiki.jenkins-ci.org/x/GYAs</url>
+  <description>This plug-in generates the trend report for FindBugs,
+    an open source program which uses static analysis to look for bugs
+    in Java code. </description>
+
+  <licenses>
+    <license>
+      <name>MIT license</name>
+      <comments>All source code is under the MIT license.</comments>
+    </license>
+    <license>
+      <name>GNU LESSER GENERAL PUBLIC LICENSE</name>
+      <comments>FindBugs messages.xml file from the findbugs project.</comments>
+    </license>
+    <license>
+      <name>GNU LESSER GENERAL PUBLIC LICENSE</name>
+      <comments>FindBugs messages.xml file from the findbugs-contrib project.</comments>
+    </license>
+    <license>
+      <comments>The findbugs logo is a trademark by The University of
+        Maryland. These icons are a courtesy of the FindBugs team.</comments>
+    </license>
+  </licenses>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.eclipse.hudson.plugins</groupId>
+      <artifactId>analysis-core</artifactId>
+      <version>1.42-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jvnet.hudson.plugins</groupId>
+      <artifactId>analysis-test</artifactId>
+      <version>1.8</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>org.jvnet.hudson.plugins.findbugs</groupId>
+        <artifactId>library</artifactId>
+        <version>2.0.0</version>
+    </dependency>
+    <dependency>
+      <groupId>xerces</groupId>
+      <artifactId>xercesImpl</artifactId>
+      <version>2.8.1</version>
+    </dependency>
+  </dependencies>
+
+  <scm>
+    <connection>scm:git:git://github.com/hudson-plugins/${project.artifactId}-plugin.git</connection>
+    <developerConnection>scm:git:git@github.com:hudson-plugins/${project.artifactId}-plugin.git</developerConnection>
+    <url>https://github.com/hudson-plugins/${project.artifactId}-plugin</url>
+  </scm>
+  
+</project>
