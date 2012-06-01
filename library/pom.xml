@@ -4,7 +4,7 @@
   <!-- Forked from Jenkins findbugs 2.0.1
   
     Parent Hudson 3.0.0.
-    Use xerces 2.8.1 (like parent).
+    Use ${xerces.version}.
   -->
   
   <parent>
@@ -46,7 +46,7 @@
     <dependency>
       <groupId>xerces</groupId>
       <artifactId>xercesImpl</artifactId>
-      <version>2.8.1</version>
+      <version>${xerces.version}</version>
     </dependency>
   </dependencies>
 
