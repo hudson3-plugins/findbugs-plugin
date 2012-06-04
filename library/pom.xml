@@ -13,7 +13,7 @@
     <version>3.0.0-SNAPSHOT</version>
   </parent>
 
-  <groupId>org.eclipse.hudson.plugins.findbugs</groupId>
+  <groupId>org.hudsonci.plugins.findbugs</groupId>
   <artifactId>library</artifactId>
   <packaging>jar</packaging>
   <version>2.0.1-SNAPSHOT</version>
