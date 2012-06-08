@@ -6,7 +6,7 @@
   <parent>
     <groupId>org.hudsonci.plugins</groupId>
     <artifactId>analysis-pom</artifactId>
-    <version>3.0.0-SNAPSHOT</version>
+    <version>3.0.0-M2-1</version>
     <relativePath>../../analysis-pom/pom.xml</relativePath>
   </parent>
 
@@ -15,7 +15,7 @@
   <packaging>hpi</packaging>
   <name>FindBugs Plug-in</name>
   <version>4.41-SNAPSHOT</version>
-  <url>http://wiki.jenkins-ci.org/x/GYAs</url>
+  <url>https://wiki.hudson-ci.org/display/HUDSON/FindBugs+Plugin</url>
   <description>This plug-in generates the trend report for FindBugs,
     an open source program which uses static analysis to look for bugs
     in Java code. </description>
@@ -38,6 +38,10 @@
         Maryland. These icons are a courtesy of the FindBugs team.</comments>
     </license>
   </licenses>
+
+  <properties>
+    <hudsonTags>recommended,report</hudsonTags>
+  </properties>
 
   <dependencies>
     <dependency>
