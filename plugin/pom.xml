@@ -47,7 +47,7 @@
     <dependency>
       <groupId>org.hudsonci.plugins</groupId>
       <artifactId>analysis-core</artifactId>
-      <version>1.42-SNAPSHOT</version>
+      <version>1.42</version>
     </dependency>
     <dependency>
       <groupId>org.jvnet.hudson.plugins</groupId>
@@ -56,9 +56,9 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-        <groupId>org.hudsonci.plugins.findbugs</groupId>
-        <artifactId>library</artifactId>
-        <version>2.0.1-SNAPSHOT</version>
+        <groupId>org.hudsonci.plugins</groupId>
+        <artifactId>findbugs-library</artifactId>
+        <version>2.0.1</version>
     </dependency>
     <dependency>
       <groupId>xerces</groupId>
