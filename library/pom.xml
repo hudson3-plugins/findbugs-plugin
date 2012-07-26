@@ -10,13 +10,13 @@
   <parent>
     <groupId>org.eclipse.hudson</groupId>
     <artifactId>hudson-parent</artifactId>
-    <version>3.0.0-M2-1</version>
+    <version>3.0.0-SNAPSHOT</version>
   </parent>
 
   <groupId>org.hudsonci.plugins</groupId>
   <artifactId>findbugs-library</artifactId>
   <packaging>jar</packaging>
-  <version>2.0.2-SNAPSHOT</version>
+  <version>2.0.1-h-1-SNAPSHOT</version>
   <name>FindBugs Plug-in shaded libraries</name>
 
   <properties>
@@ -41,12 +41,34 @@
           <groupId>com.google.code.findbugs</groupId>
           <artifactId>annotations</artifactId>
         </exclusion>
+        <exclusion>
+          <groupId>xalan</groupId>
+          <artifactId>xalan</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>xerces</groupId>
+          <artifactId>xercesImpl</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>xml-apis</groupId>
+          <artifactId>xml-apis</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>dom4j</groupId>
+          <artifactId>dom4j</artifactId>
+        </exclusion>
       </exclusions>
     </dependency>
     <dependency>
       <groupId>xerces</groupId>
       <artifactId>xercesImpl</artifactId>
       <version>${xerces.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>xml-apis</groupId>
+      <artifactId>xml-apis</artifactId>
+      <version>1.3.03</version>
     </dependency>
   </dependencies>
 
