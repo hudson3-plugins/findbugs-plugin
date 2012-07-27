@@ -14,7 +14,7 @@
   <artifactId>findbugs</artifactId>
   <packaging>hpi</packaging>
   <name>FindBugs Plug-in</name>
-  <version>4.41-h-1</version>
+  <version>4.41-h-2-SNAPSHOT</version>
   <url>https://wiki.hudson-ci.org/display/HUDSON/FindBugs+Plugin</url>
   <description>This plug-in generates the trend report for FindBugs,
     an open source program which uses static analysis to look for bugs
@@ -58,7 +58,7 @@
     <dependency>
         <groupId>org.hudsonci.plugins</groupId>
         <artifactId>findbugs-library</artifactId>
-        <version>2.0.1-h-1</version>
+        <version>2.0.1-h-2-SNAPSHOT</version>
     </dependency>
   </dependencies>
 
