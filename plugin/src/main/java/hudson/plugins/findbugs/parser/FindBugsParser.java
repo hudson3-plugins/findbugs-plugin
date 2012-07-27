@@ -24,7 +24,6 @@ import org.apache.commons.digester.Digester;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.xerces.parsers.SAXParser;
-import org.dom4j.DocumentException;
 import org.jvnet.localizer.LocaleProvider;
 import org.xml.sax.SAXException;
 
@@ -36,6 +35,9 @@ import edu.umd.cs.findbugs.SourceLineAnnotation;
 import edu.umd.cs.findbugs.ba.SourceFile;
 import edu.umd.cs.findbugs.ba.SourceFinder;
 import edu.umd.cs.findbugs.cloud.Cloud;
+
+//Instrumented package via "maven-shade-plugin"
+import org.hudson.dom4j.DocumentException;
 
 /**
  * A parser for the native FindBugs XML files (ant task, batch file or
@@ -257,11 +259,11 @@ public class FindBugsParser implements AnnotationParser {
         if (oldProperty != null) {
             System.setProperty(SAX_DRIVER_PROPERTY, SAXParser.class.getName());
         }
-        ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
-        Thread.currentThread().setContextClassLoader(FindBugsParser.class.getClassLoader());
+        //ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
+        //Thread.currentThread().setContextClassLoader(FindBugsParser.class.getClassLoader());
         SortedBugCollection collection = new SortedBugCollection();
         collection.readXML(file);
-        Thread.currentThread().setContextClassLoader(contextClassLoader);
+        //Thread.currentThread().setContextClassLoader(contextClassLoader);
         if (oldProperty != null) {
             System.setProperty(SAX_DRIVER_PROPERTY, oldProperty);
         }
