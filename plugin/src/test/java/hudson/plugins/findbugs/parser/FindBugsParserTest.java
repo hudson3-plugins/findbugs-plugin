@@ -19,11 +19,9 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
+import org.hudson.dom4j.DocumentException;
 import org.junit.Test;
 import org.xml.sax.SAXException;
-
-//Instrumented package via "maven-shade-plugin"
-import org.hudson.dom4j.DocumentException;
 
 /**
  *  Tests the extraction of FindBugs analysis results.

@@ -10,13 +10,13 @@
   <parent>
     <groupId>org.eclipse.hudson</groupId>
     <artifactId>hudson-parent</artifactId>
-    <version>3.0.0-M3</version>
+    <version>3.0.0-RC2</version>
   </parent>
 
   <groupId>org.hudsonci.plugins</groupId>
   <artifactId>findbugs-library</artifactId>
   <packaging>jar</packaging>
-  <version>2.0.1-h-3-SNAPSHOT</version>
+  <version>2.0.1-h3-SNAPSHOT</version>
   <name>FindBugs Plug-in shaded libraries</name>
 
   <properties>

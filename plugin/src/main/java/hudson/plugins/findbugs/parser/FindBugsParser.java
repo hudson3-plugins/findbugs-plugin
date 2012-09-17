@@ -1,6 +1,7 @@
 package hudson.plugins.findbugs.parser; // NOPMD
 
 import hudson.plugins.analysis.core.AnnotationParser;
+import hudson.plugins.analysis.util.TreeStringBuilder;
 import hudson.plugins.analysis.util.model.FileAnnotation;
 import hudson.plugins.analysis.util.model.LineRange;
 import hudson.plugins.analysis.util.model.Priority;
@@ -24,6 +25,7 @@ import org.apache.commons.digester.Digester;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.xerces.parsers.SAXParser;
+import org.hudson.dom4j.DocumentException;
 import org.jvnet.localizer.LocaleProvider;
 import org.xml.sax.SAXException;
 
@@ -35,9 +37,6 @@ import edu.umd.cs.findbugs.SourceLineAnnotation;
 import edu.umd.cs.findbugs.ba.SourceFile;
 import edu.umd.cs.findbugs.ba.SourceFinder;
 import edu.umd.cs.findbugs.cloud.Cloud;
-
-//Instrumented package via "maven-shade-plugin"
-import org.hudson.dom4j.DocumentException;
 
 /**
  * A parser for the native FindBugs XML files (ant task, batch file or
@@ -55,6 +54,7 @@ public class FindBugsParser implements AnnotationParser {
 
     private static final String DOT = ".";
     private static final String SLASH = "/";
+    private static final String CLOUD_DETAILS_URL_PROPERTY = "detailsUrl";
 
     private static final int DAY_IN_MSEC = 1000 * 60 * 60 * 24;
     private static final int HIGH_PRIORITY_LOWEST_RANK = 4;
@@ -215,7 +215,8 @@ public class FindBugsParser implements AnnotationParser {
         SourceFinder sourceFinder = new SourceFinder(project);
         String actualName = extractModuleName(moduleName, project);
 
-        ArrayList<FileAnnotation> annotations = new ArrayList<FileAnnotation>();
+        TreeStringBuilder stringPool = new TreeStringBuilder();
+        List<FileAnnotation> annotations = new ArrayList<FileAnnotation>();
         Collection<BugInstance> bugs = collection.getCollection();
         for (BugInstance warning : bugs) {
             SourceLineAnnotation sourceLine = warning.getPrimarySourceLineAnnotation();
@@ -240,6 +241,7 @@ public class FindBugsParser implements AnnotationParser {
                 setAffectedLines(warning, bug);
 
                 annotations.add(bug);
+                bug.intern(stringPool);
             }
         }
         return annotations;
@@ -259,11 +261,11 @@ public class FindBugsParser implements AnnotationParser {
         if (oldProperty != null) {
             System.setProperty(SAX_DRIVER_PROPERTY, SAXParser.class.getName());
         }
-        //ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
-        //Thread.currentThread().setContextClassLoader(FindBugsParser.class.getClassLoader());
+        ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
+        Thread.currentThread().setContextClassLoader(FindBugsParser.class.getClassLoader());
         SortedBugCollection collection = new SortedBugCollection();
         collection.readXML(file);
-        //Thread.currentThread().setContextClassLoader(contextClassLoader);
+        Thread.currentThread().setContextClassLoader(contextClassLoader);
         if (oldProperty != null) {
             System.setProperty(SAX_DRIVER_PROPERTY, oldProperty);
         }
@@ -284,13 +286,16 @@ public class FindBugsParser implements AnnotationParser {
     @edu.umd.cs.findbugs.annotations.SuppressWarnings("NP")
     private boolean setCloudInformation(final SortedBugCollection collection, final BugInstance warning, final Bug bug) {
         Cloud cloud = collection.getCloud();
+        cloud.waitUntilIssueDataDownloaded();
+
         bug.setShouldBeInCloud(cloud.isOnlineCloud());
-        // FIXME: This method has been removed in findbugs 2.0.0
-        // bug.setDetailsUrlTemplate(cloud.getBugDetailsUrlTemplate());
+        Map<String, String> cloudDetails = collection.getXmlCloudDetails();
+        bug.setDetailsUrlTemplate(cloudDetails.get(CLOUD_DETAILS_URL_PROPERTY));
+
         long firstSeen = cloud.getFirstSeen(warning);
         bug.setInCloud(cloud.isInCloud(warning));
         bug.setFirstSeen(firstSeen);
-        int ageInDays = (int) ((collection.getAnalysisTimestamp() - firstSeen) / DAY_IN_MSEC);
+        int ageInDays = (int)((collection.getAnalysisTimestamp() - firstSeen) / DAY_IN_MSEC);
         bug.setAgeInDays(ageInDays);
         bug.setReviewCount(cloud.getNumberReviewers(warning));
 

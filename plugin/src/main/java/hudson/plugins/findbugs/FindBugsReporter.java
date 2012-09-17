@@ -94,6 +94,9 @@ public class FindBugsReporter extends HealthAwareReporter<FindBugsResult> {
      * @param isRankActivated
      *            determines whether to use the rank when evaluation the
      *            priority
+     * @param canComputeNew
+     *            determines whether new warnings should be computed (with
+     *            respect to baseline)
      */
     // CHECKSTYLE:OFF
     @SuppressWarnings("PMD.ExcessiveParameterList")
@@ -213,7 +216,7 @@ public class FindBugsReporter extends HealthAwareReporter<FindBugsResult> {
     }
 
     /** Ant file-set pattern of files to work with. @deprecated */
-    @SuppressWarnings("unused")
+    @SuppressWarnings("PMD")
     @edu.umd.cs.findbugs.annotations.SuppressWarnings("SE")
     @Deprecated
     private transient String pattern; // obsolete since release 2.5
