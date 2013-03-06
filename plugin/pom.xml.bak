@@ -3,18 +3,17 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>org.hudsonci.plugins</groupId>
+    <groupId>org.jvnet.hudson.plugins</groupId>
     <artifactId>analysis-pom</artifactId>
-    <version>1.42-h-1</version>
-    <relativePath/>
+    <version>1.42</version>
+    <relativePath>../../analysis-pom/pom.xml</relativePath>
   </parent>
 
-  <groupId>org.hudsonci.plugins</groupId>
   <artifactId>findbugs</artifactId>
   <packaging>hpi</packaging>
   <name>FindBugs Plug-in</name>
-  <version>4.47-h-1-SNAPSHOT</version>
-  <url>http://wiki.hudson-ci.org/x/GYAs</url>
+  <version>4.47</version>
+  <url>http://wiki.jenkins-ci.org/x/GYAs</url>
   <description>This plug-in generates the trend report for FindBugs,
     an open source program which uses static analysis to look for bugs
     in Java code. </description>
@@ -44,38 +43,40 @@
 
   <dependencies>
     <dependency>
-      <groupId>org.hudsonci.plugins</groupId>
+      <groupId>org.jvnet.hudson.plugins</groupId>
       <artifactId>analysis-core</artifactId>
-      <version>1.49-h-1</version>
+      <version>1.49</version>
     </dependency>
     <dependency>
-      <groupId>org.hudsonci.plugins</groupId>
+      <groupId>org.jvnet.hudson.plugins</groupId>
       <artifactId>analysis-test</artifactId>
-      <version>1.9-h-1</version>
+      <version>1.9</version>
       <scope>test</scope>
     </dependency>
     <dependency>
-        <groupId>org.hudsonci.plugins.findbugs</groupId>
+        <groupId>org.jvnet.hudson.plugins.findbugs</groupId>
         <artifactId>library</artifactId>
-        <version>2.0.1-h-1-SNAPSHOT</version>
+        <version>2.0.1</version>
     </dependency>
     <dependency>
       <groupId>xerces</groupId>
       <artifactId>xercesImpl</artifactId>
       <version>2.9.1</version>
     </dependency>
-    <dependency>
-      <groupId>org.hudsonci.plugins</groupId>
-      <artifactId>jfreechart-plugin</artifactId>
-      <version>1.4</version>
-    </dependency>
   </dependencies>
 
   <scm>
-    <connection>scm:git:git://github.com/hudson3-plugins/findbugs-plugin.git</connection>
-    <developerConnection>scm:git:git@github.com:hudson3-plugins/findbugs-plugin.git</developerConnection>
-    <url>https://github.com/hudson3-plugins/findbugs-plugin</url>
+    <connection>scm:git:git://github.com/jenkinsci/${project.artifactId}-plugin.git</connection>
+    <developerConnection>scm:git:git@github.com:jenkinsci/${project.artifactId}-plugin.git</developerConnection>
+    <url>https://github.com/jenkinsci/${project.artifactId}-plugin</url>
   </scm>
+
+  <repositories>
+    <repository>
+      <id>repo.jenkins-ci.org</id>
+      <url>http://repo.jenkins-ci.org/public/</url>
+    </repository>
+  </repositories>
 
   <pluginRepositories>
     <pluginRepository>
@@ -84,15 +85,4 @@
     </pluginRepository>
   </pluginRepositories>
 
-  <developers>
-    <developer>
-      <name>Ulli Hafner</name>
-      <id>drulli</id>
-      <email>ullrich.hafner@gmail.com</email>
-    </developer>
-  </developers>
-  
-  <properties>
-    <hudsonTags>reports</hudsonTags>
-  </properties>
 </project>

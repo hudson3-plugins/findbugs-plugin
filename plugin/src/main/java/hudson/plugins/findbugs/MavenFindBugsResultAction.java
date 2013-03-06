@@ -9,6 +9,7 @@ import hudson.maven.MavenModuleSetBuild;
 import hudson.model.Action;
 import hudson.model.AbstractBuild;
 import hudson.plugins.analysis.core.HealthDescriptor;
+import hudson.plugins.analysis.core.ParserResult;
 
 import java.util.List;
 import java.util.Map;
@@ -35,22 +36,6 @@ public class MavenFindBugsResultAction extends FindBugsResultAction implements A
      *            health descriptor to use
      * @param defaultEncoding
      *            the default encoding to be used when reading and parsing files
-     */
-    public MavenFindBugsResultAction(final MavenModuleSetBuild owner, final HealthDescriptor healthDescriptor,
-            final String defaultEncoding) {
-        super(owner, healthDescriptor);
-        this.defaultEncoding = defaultEncoding;
-    }
-
-    /**
-     * Creates a new instance of <code>MavenFindBugsResultAction</code>.
-     *
-     * @param owner
-     *            the associated build of this action
-     * @param healthDescriptor
-     *            health descriptor to use
-     * @param defaultEncoding
-     *            the default encoding to be used when reading and parsing files
      * @param result
      *            the result in this build
      */
@@ -62,7 +47,8 @@ public class MavenFindBugsResultAction extends FindBugsResultAction implements A
 
     /** {@inheritDoc} */
     public MavenAggregatedReport createAggregatedAction(final MavenModuleSetBuild build, final Map<MavenModule, List<MavenBuild>> moduleBuilds) {
-        return new MavenFindBugsResultAction(build, getHealthDescriptor(), defaultEncoding);
+        return new MavenFindBugsResultAction(build, getHealthDescriptor(), defaultEncoding,
+                new FindBugsResult(build, defaultEncoding, new ParserResult(), false));
     }
 
     /** {@inheritDoc} */
@@ -77,7 +63,7 @@ public class MavenFindBugsResultAction extends FindBugsResultAction implements A
 
     /**
      * Called whenever a new module build is completed, to update the aggregated
-     * report. When multiple builds complete simultaneously, Jenkins serializes
+     * report. When multiple builds complete simultaneously, Hudson serializes
      * the execution of this method, so this method needs not be
      * concurrency-safe.
      *

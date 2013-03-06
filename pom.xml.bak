@@ -14,10 +14,19 @@
     <module>plugin</module>
   </modules>
 
-  <scm>
-    <connection>scm:git:git://github.com/hudson3-plugins/findbugs-plugin.git</connection>
-    <developerConnection>scm:git:git@github.com:hudson3-plugins/findbugs-plugin.git</developerConnection>
-    <url>https://github.com/hudson3-plugins/findbugs-plugin</url>
-  </scm>
+
+    <repositories>
+        <repository>
+            <id>repo.jenkins-ci.org</id>
+            <url>http://repo.jenkins-ci.org/public/</url>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>repo.jenkins-ci.org</id>
+            <url>http://repo.jenkins-ci.org/public/</url>
+        </pluginRepository>
+    </pluginRepositories>
 </project>  
   

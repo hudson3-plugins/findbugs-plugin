@@ -1,5 +1,6 @@
 package hudson.plugins.findbugs;
 
+import hudson.FilePath;
 import hudson.maven.MavenAggregatedReport;
 import hudson.maven.MavenBuildProxy;
 import hudson.maven.MojoInfo;
@@ -11,6 +12,7 @@ import hudson.plugins.analysis.core.HealthAwareReporter;
 import hudson.plugins.analysis.core.ParserResult;
 import hudson.plugins.analysis.util.PluginLogger;
 import hudson.plugins.findbugs.parser.FindBugsParser;
+import hudson.remoting.VirtualChannel;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -91,6 +93,8 @@ public class FindBugsReporter extends HealthAwareReporter<FindBugsResult> {
      *            annotation threshold
      * @param canRunOnFailed
      *            determines whether the plug-in can run for failed builds, too
+     * @param useStableBuildAsReference
+     *            determines whether only stable builds should be used as reference builds or not
      * @param isRankActivated
      *            determines whether to use the rank when evaluation the
      *            priority
@@ -106,13 +110,13 @@ public class FindBugsReporter extends HealthAwareReporter<FindBugsResult> {
             final String unstableNewAll, final String unstableNewHigh, final String unstableNewNormal, final String unstableNewLow,
             final String failedTotalAll, final String failedTotalHigh, final String failedTotalNormal, final String failedTotalLow,
             final String failedNewAll, final String failedNewHigh, final String failedNewNormal, final String failedNewLow,
-            final boolean canRunOnFailed, final boolean isRankActivated, final boolean canComputeNew) {
+            final boolean canRunOnFailed, final boolean useStableBuildAsReference, final boolean isRankActivated, final boolean canComputeNew) {
         super(healthy, unHealthy, thresholdLimit, useDeltaValues,
                 unstableTotalAll, unstableTotalHigh, unstableTotalNormal, unstableTotalLow,
                 unstableNewAll, unstableNewHigh, unstableNewNormal, unstableNewLow,
                 failedTotalAll, failedTotalHigh, failedTotalNormal, failedTotalLow,
                 failedNewAll, failedNewHigh, failedNewNormal, failedNewLow,
-                canRunOnFailed, canComputeNew, PLUGIN_NAME);
+                canRunOnFailed, useStableBuildAsReference, canComputeNew, PLUGIN_NAME);
         this.isRankActivated = isRankActivated;
     }
     // CHECKSTYLE:ON
@@ -168,12 +172,21 @@ public class FindBugsReporter extends HealthAwareReporter<FindBugsResult> {
         FilesParser findBugsCollector = new FilesParser(PLUGIN_NAME, determineFileName(mojo),
                 new FindBugsParser(sources, isRankActivated), getModuleName(pom));
 
-        return getTargetPath(pom).act(findBugsCollector);
+        return getOutputPath(mojo, pom).act(findBugsCollector);
+    }
+
+    private FilePath getOutputPath(final MojoInfo mojo, final MavenProject pom) {
+        try {
+            return new FilePath((VirtualChannel)null, mojo.getConfigurationValue("findbugsXmlOutputDirectory", String.class));
+        }
+        catch (ComponentConfigurationException exception) {
+            return getTargetPath(pom);
+        }
     }
 
     @Override
     protected FindBugsResult createResult(final MavenBuild build, final ParserResult project) {
-        return new FindBugsReporterResult(build, getDefaultEncoding(), project);
+        return new FindBugsReporterResult(build, getDefaultEncoding(), project, useOnlyStableBuildsAsReference());
     }
 
     @Override
