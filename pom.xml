@@ -11,7 +11,7 @@
   <groupId>org.jvnet.hudson.plugins.findbugs</groupId>
   <artifactId>parent</artifactId>
   <packaging>pom</packaging>
-  <version>1.0-h-4</version>
+  <version>1.0-h-5-SNAPSHOT</version>
   <name>FindBugs Parent</name>
   <description>Parent pom to build findbugs plugg-in that is composed of plug-in and shaded findbugs library</description>
 
