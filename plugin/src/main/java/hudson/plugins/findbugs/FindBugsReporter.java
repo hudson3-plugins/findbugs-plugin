@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import org.apache.commons.lang3.StringUtils;
 
 import org.apache.maven.project.MavenProject;
 import org.codehaus.plexus.component.configurator.ComponentConfigurationException;
@@ -177,11 +178,15 @@ public class FindBugsReporter extends HealthAwareReporter<FindBugsResult> {
 
     private FilePath getOutputPath(final MojoInfo mojo, final MavenProject pom) {
         try {
-            return new FilePath((VirtualChannel)null, mojo.getConfigurationValue("findbugsXmlOutputDirectory", String.class));
+            String configurationValue = mojo.getConfigurationValue("findbugsXmlOutputDirectory", String.class);
+            if (StringUtils.isNotBlank(configurationValue)) {
+              return new FilePath((VirtualChannel)null, configurationValue);
+            }
         }
         catch (ComponentConfigurationException exception) {
-            return getTargetPath(pom);
+            // ignore and use fall back value
         }
+        return getTargetPath(pom);
     }
 
     @Override
