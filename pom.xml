@@ -4,7 +4,7 @@
   <parent>
     <groupId>org.hudsonci.plugins</groupId>
     <artifactId>analysis-pom</artifactId>
-    <version>1.42-h-1</version>
+    <version>1.42-h-2</version>
     <relativePath />
   </parent>
 
@@ -25,5 +25,5 @@
     <developerConnection>scm:git:git@github.com:hudson3-plugins/findbugs-plugin.git</developerConnection>
     <url>https://github.com/hudson3-plugins/findbugs-plugin</url>
   </scm>
-</project>  
-  
+</project>
+

@@ -67,7 +67,7 @@
     <dependency>
       <groupId>org.hudsonci.plugins</groupId>
       <artifactId>jfreechart-plugin</artifactId>
-      <version>1.4</version>
+      <version>1.5</version>
     </dependency>
   </dependencies>
 
@@ -95,4 +95,26 @@
   <properties>
     <hudsonTags>reports</hudsonTags>
   </properties>
+  
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.eclipse.hudson.tools</groupId>
+        <artifactId>maven-hpi-plugin</artifactId>
+        <version>3.0.3</version>
+      </plugin>                     
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.3</version>
+        <configuration>
+          <source>1.7</source>
+          <target>1.7</target>
+          <compilerArgs>
+            <arg>-verbose</arg>
+          </compilerArgs>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>
