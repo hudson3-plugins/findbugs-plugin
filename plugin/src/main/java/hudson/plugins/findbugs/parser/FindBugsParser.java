@@ -38,6 +38,17 @@ import edu.umd.cs.findbugs.ba.SourceFile;
 import edu.umd.cs.findbugs.ba.SourceFinder;
 import edu.umd.cs.findbugs.cloud.Cloud;
 
+/* If shading ever works, the above should be replaced with:
+import edu.shaded.umd.cs.findbugs.BugAnnotation;
+import edu.shaded.umd.cs.findbugs.BugInstance;
+import edu.shaded.umd.cs.findbugs.Project;
+import edu.shaded.umd.cs.findbugs.SortedBugCollection;
+import edu.shaded.umd.cs.findbugs.SourceLineAnnotation;
+import edu.shaded.umd.cs.findbugs.ba.SourceFile;
+import edu.shaded.umd.cs.findbugs.ba.SourceFinder;
+import edu.shaded.umd.cs.findbugs.cloud.Cloud;
+*/
+
 /**
  * A parser for the native FindBugs XML files (ant task, batch file or
  * maven-findbugs-plugin >= 1.2).

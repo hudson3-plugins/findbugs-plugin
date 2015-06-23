@@ -47,6 +47,16 @@
       <groupId>org.hudsonci.plugins</groupId>
       <artifactId>analysis-core</artifactId>
       <version>1.49-h-1</version>
+      <!--exclusions>
+        <exclusion>
+          <groupId>com.google.code.findbugs</groupId>
+          <artifactId>annotations</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.google.code.findbugs</groupId>
+          <artifactId>jsr305</artifactId>
+        </exclusion>
+      </exclusions-->
     </dependency>
     <dependency>
       <groupId>org.hudsonci.plugins</groupId>
@@ -91,18 +101,18 @@
       <email>ullrich.hafner@gmail.com</email>
     </developer>
   </developers>
-  
+
   <properties>
     <hudsonTags>reports</hudsonTags>
   </properties>
-  
+
   <build>
     <plugins>
       <plugin>
         <groupId>org.eclipse.hudson.tools</groupId>
         <artifactId>maven-hpi-plugin</artifactId>
         <version>3.0.3</version>
-      </plugin>                     
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
