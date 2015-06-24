@@ -80,10 +80,6 @@
                   <pattern>org.dom4j</pattern>
                   <shadedPattern>org.hudson.dom4j</shadedPattern>
                 </relocation>
-                <relocation>
-                  <pattern>edu.umd.cs.findbugs</pattern>
-                  <shadedPattern>edu.shaded.umd.cs.findbugs</shadedPattern>
-                </relocation>
               </relocations>
             </configuration>
           </execution>

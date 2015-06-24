@@ -67,7 +67,7 @@
     <dependency>
         <groupId>org.hudsonci.plugins.findbugs</groupId>
         <artifactId>library</artifactId>
-        <version>2.0.1-h-3-SNAPSHOT</version>
+        <version>2.0.1-h-2-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>xerces</groupId>
