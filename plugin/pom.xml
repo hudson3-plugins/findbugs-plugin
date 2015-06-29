@@ -47,16 +47,6 @@
       <groupId>org.hudsonci.plugins</groupId>
       <artifactId>analysis-core</artifactId>
       <version>1.49-h-1</version>
-      <!--exclusions>
-        <exclusion>
-          <groupId>com.google.code.findbugs</groupId>
-          <artifactId>annotations</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>com.google.code.findbugs</groupId>
-          <artifactId>jsr305</artifactId>
-        </exclusion>
-      </exclusions-->
     </dependency>
     <dependency>
       <groupId>org.hudsonci.plugins</groupId>
@@ -87,13 +77,6 @@
     <url>https://github.com/hudson3-plugins/findbugs-plugin</url>
   </scm>
 
-  <pluginRepositories>
-    <pluginRepository>
-      <id>repo.jenkins-ci.org</id>
-      <url>http://repo.jenkins-ci.org/public/</url>
-    </pluginRepository>
-  </pluginRepositories>
-
   <developers>
     <developer>
       <name>Ulli Hafner</name>
@@ -123,6 +106,18 @@
           <compilerArgs>
             <arg>-verbose</arg>
           </compilerArgs>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <version>2.1</version>
+        <configuration>
+          <!-- enable release profile during the release, create IPS package, and sign bits. -->
+          <prepareVerifyArgs>-P release,sign</prepareVerifyArgs>
+          <goals>-DskipTests javadoc:javadoc deploy javadoc:aggregate</goals>
+          <pushChanges>false</pushChanges>
+          <localCheckout>true</localCheckout>
         </configuration>
       </plugin>
     </plugins>
